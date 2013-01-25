@@ -46,8 +46,8 @@
       twod.forEach(function (d,i) {
         /* var e = (i+1) * 10; */
         var mesh = new THREE.Mesh( cube, material );
-        mesh.position.x = d[0];
-        mesh.position.y = d[1];
+        mesh.position.x = d[0] - 1/2;
+        mesh.position.y = d[1] - 1/2;
         mesh.updateMatrix();
         group.add(mesh)
         var vec = new THREE.Vector3(d[0],d[1],0);
