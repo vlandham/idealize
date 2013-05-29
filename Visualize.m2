@@ -29,6 +29,11 @@ newPackage(
     	)
 
 export {
+    
+    -- Options
+     "Path",
+    
+    -- Methods
      "visIntegralClosure",
      "visIdeal"
 }
@@ -41,16 +46,16 @@ export {
 --input: A string that is an array passed from visIdeal or visIntegralClosure
 --output: The Newton polytope of the input array.
 --
-visIdealOutput = method()
-visIdealOutput(String) := S -> (
+visIdealOutput = method(Options => {Path => "./" })
+visIdealOutput(String) := opts -> S -> (
     local fileName; local openFile; local PATH;
-   
+    
     fileName = (toString currentTime() )|".html";
-    PATH = "./temp-files/"|fileName;
+    PATH = opts.Path|fileName;
 --    PATH = fileName;
     openOut PATH << 
        get "./templates/visIdeal/temp01.html" << 
-       endl << 
+       endl << endl <<
        "    var data = "|S|";" << 
        endl << endl <<
        get "./templates/visIdeal/temp02.html" << 
@@ -64,32 +69,31 @@ visIdealOutput(String) := S -> (
 --input: A monomial ideal of a polynomial ring in 2 or 3 variables.
 --output: The newton polytope of the of the ideal.
 --
-visIdeal = method()
-visIdeal(Ideal) := J -> (
+visIdeal = method(Options => {Path => "./" })
+visIdeal(Ideal) := opts -> J -> (
     local G; local arrayList; local arrayString; 
 
     G = flatten entries gens J;
     arrayList = new Array from apply(G, i -> new Array from flatten exponents i);
     arrayString = toString arrayList;
     
-    return visIdealOutput arrayString; 
+    return visIdealOutput(arrayString, Path => opts.Path );
     )
 
 
 --input: A monomial ideal of a polynomial ring in 2 or 3 variables.
 --output: The newton polytope of the integral closure of the ideal.
 --
-visIntegralClosure = method()
-visIntegralClosure(Ideal) := J -> (
+visIntegralClosure = method(Options => {Path => "./" })
+visIntegralClosure(Ideal) := opts -> J -> (
     local G; local arrayList; local arrayString; 
     local fileName; local openFile;
-
 
     G = flatten entries gens integralClosure J;
     arrayList = new Array from apply(G, i -> new Array from flatten exponents i);
     arrayString = toString arrayList;
     
-    return visIdealOutput arrayString; 
+    return visIdealOutput(arrayString, Path => opts.Path ); 
     )
 
 
@@ -132,6 +136,18 @@ loadPackage"Visualize"
 
 R = QQ[x,y,z]
 I = ideal"x2,y3,z4"
-visIdeal I
+visIdeal(I, Path => "~/Dropbox/GitHub/idealize/temp-files/" )
+visIntegralClosure(I, Path => "./temp-files/" )
+
+S = QQ[x,y]
+J = ideal"x3,y5"
+visIdeal J
 visIntegralClosure I
 
+if (pid = fork()) == 0 then (
+     try "$:7500" << "hi there" << close;
+     exit 0;
+     )
+sleep 2
+"$localhost:8080" << "hi"
+wait pid
