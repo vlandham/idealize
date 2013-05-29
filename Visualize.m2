@@ -52,7 +52,6 @@ visIdealOutput(String) := opts -> S -> (
     
     fileName = (toString currentTime() )|".html";
     PATH = opts.Path|fileName;
---    PATH = fileName;
     openOut PATH << 
        get "./templates/visIdeal/temp01.html" << 
        endl << endl <<
@@ -141,13 +140,7 @@ visIntegralClosure(I, Path => "./temp-files/" )
 
 S = QQ[x,y]
 J = ideal"x3,y5"
-visIdeal J
-visIntegralClosure I
+visIdeal( J,  Path => "./temp-files/" )
+visIntegralClosure( I,  Path => "./temp-files/" )
 
-if (pid = fork()) == 0 then (
-     try "$:7500" << "hi there" << close;
-     exit 0;
-     )
-sleep 2
-"$localhost:8080" << "hi"
-wait pid
+
