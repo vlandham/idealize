@@ -53,12 +53,16 @@ visIdealOutput(String) := opts -> S -> (
     fileName = (toString currentTime() )|".html";
     PATH = opts.Path|fileName;
     openOut PATH << 
-       get "./templates/visIdeal/temp01.html" << 
-       endl << endl <<
-       "    var data = "|S|";" << 
-       endl << endl <<
-       get "./templates/visIdeal/temp02.html" << 
-       close;
+    	replace("visArray", S, get "./templates/visIdeal/temp-visIdeal.html") << 
+	close;
+        
+--  openOut PATH << 
+--     get "./templates/visIdeal/temp01.html" << 
+--       endl << endl <<
+--       "    var data = "|S|";" << 
+--       endl << endl <<
+--       get "./templates/visIdeal/temp02.html" << 
+--       close;
        
     openFile = "open "|PATH;
     
@@ -134,7 +138,7 @@ restart
 loadPackage"Visualize"
 
 R = QQ[x,y,z]
-I = ideal"x2,y3,z4"
+I = ideal"x4,y6,z4"
 visIdeal(I, Path => "~/Dropbox/GitHub/idealize/temp-files/" )
 visIntegralClosure(I, Path => "./temp-files/" )
 
