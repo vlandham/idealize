@@ -53,7 +53,7 @@ visIdealOutput(String) := opts -> S -> (
     fileName = (toString currentTime() )|".html";
     PATH = opts.Path|fileName;
     openOut PATH << 
-    	replace("visArray", S, get "./templates/visIdeal/temp-visIdeal.html") << 
+    	replace("visArray", S, get "./templates/visIdeal/visIdeal.html") << 
 	close;
         
 --  openOut PATH << 
