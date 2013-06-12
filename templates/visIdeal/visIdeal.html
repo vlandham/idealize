@@ -1,6 +1,6 @@
 <html> 
   <head> 
-    <title>Idealize</title> 
+    <title>visIdeal</title> 
     <style>canvas { width: 100%; height: 100% }</style> 
   </head> 
   <body> 
@@ -84,7 +84,9 @@
     var windowHalfX = window.innerWidth / 2;
     var windowHalfY = window.innerHeight / 2;
 
-    var data = [[4, 0, 0], [2, 3, 0], [1, 6, 1], [0, 0, 4], [0, 8, 0]];
+    // var data = [[4, 0, 0], [0, 6, 0], [0, 0, 4]];
+    // var data = [[4,0,0],[2,3,0],[1,6,1],[0,0,4],[0,8,0]];
+    var data = visArray;
 
     function newMesh(point, geometry, materials) {
       var mesh = new THREE.Mesh( geometry, materials );
@@ -203,26 +205,26 @@
       window.addEventListener( 'resize', onWindowResize, false );
     }
 
-function setupAttributes( geometry, values ) {
+    function setupAttributes( geometry, values ) {
 
-				for( var f = 0; f < geometry.faces.length; f ++ ) {
+      for( var f = 0; f < geometry.faces.length; f ++ ) {
 
-					var face = geometry.faces[ f ];
+        var face = geometry.faces[ f ];
 
-					if ( face instanceof THREE.Face3 ) {
+        if ( face instanceof THREE.Face3 ) {
 
-						values[ f ] = [ new THREE.Vector4( 1, 0, 0, 0 ), new THREE.Vector4( 0, 1, 0, 0 ), new THREE.Vector4( 0, 0, 1, 0 ) ];
+          values[ f ] = [ new THREE.Vector4( 1, 0, 0, 0 ), new THREE.Vector4( 0, 1, 0, 0 ), new THREE.Vector4( 0, 0, 1, 0 ) ];
 
-					} else {
+          } else {
 
-						values[ f ] = [ new THREE.Vector4( 1, 0, 0, 1 ), new THREE.Vector4( 1, 1, 0, 1 ), new THREE.Vector4( 0, 1, 0, 1 ), new THREE.Vector4( 0, 0, 0, 1 ) ];
+          values[ f ] = [ new THREE.Vector4( 1, 0, 0, 1 ), new THREE.Vector4( 1, 1, 0, 1 ), new THREE.Vector4( 0, 1, 0, 1 ), new THREE.Vector4( 0, 0, 0, 1 ) ];
 
-					}
+        }
 
-				}
+      }
 
-			}
-    
+    }
+
 
     function animate() {
       requestAnimationFrame(animate);
@@ -238,10 +240,9 @@ function setupAttributes( geometry, values ) {
       renderer.render( scene, camera );
 
     }
-    
+
     init();
     animate();
-
     function onWindowResize() {
 
       windowHalfX = window.innerWidth / 2;
