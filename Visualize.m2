@@ -76,7 +76,7 @@ visIdeal = method(Options => {Path => "./" })
 visIdeal(Ideal) := opts -> J -> (
     local G; local arrayList; local arrayString; 
 
-    G = flatten entries gens J;
+    G = flatten entries mingens J;
     arrayList = new Array from apply(G, i -> new Array from flatten exponents i);
     arrayString = toString arrayList;
     
@@ -92,7 +92,7 @@ visIntegralClosure(Ideal) := opts -> J -> (
     local G; local arrayList; local arrayString; 
     local fileName; local openFile;
 
-    G = flatten entries gens integralClosure J;
+    G = flatten entries mingens integralClosure J;
     arrayList = new Array from apply(G, i -> new Array from flatten exponents i);
     arrayString = toString arrayList;
     
@@ -138,7 +138,7 @@ restart
 loadPackage"Visualize"
 
 R = QQ[x,y,z]
-I = ideal"x4,y6,z4"
+I = ideal"x4,x2y3,xy6z,z4,y8"
 visIdeal(I, Path => "~/Dropbox/GitHub/idealize/temp-files/" )
 visIntegralClosure(I, Path => "./temp-files/" )
 
