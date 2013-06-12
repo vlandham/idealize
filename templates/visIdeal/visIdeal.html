@@ -1,11 +1,10 @@
 <html> 
   <head> 
-    <title>Idealize</title> 
+    <title>visIdeal</title> 
     <style>canvas { width: 100%; height: 100% }</style> 
   </head> 
   <body> 
   <script src="js/three.min.js"></script> 
-  <!-- <script src="js/d3.v3.min.js"></script>  -->
   <script src="js/underscore.js"></script> 
 		<script type="x-shader/x-vertex" id="vertexShader">
 
@@ -97,40 +96,6 @@
       mesh.updateMatrix();
       return mesh;
     }
-
-    // function initCube(s) {
-    //   var geometry = new THREE.CubeGeometry( s, s, s );
-    //   var faceIndices = [ 'a', 'b', 'c', 'd' ];
-    //   var color, point, face, numberOfSides, vertexIndex;
-    //   for ( var i = 0; i < geometry.vertices.length; i++ ) 
-    //   {
-    //     point = geometry.vertices[ i ];
-    //     color = new THREE.Color( 0xffffff );
-    //     color.setRGB( 0.5 + point.x / s, 0.5 + point.y / s, 0.5 + point.z / s );
-    //     geometry.colors[i] = color; // use this array for convenience
-    //   }
-
-    //   for (var i = 0; i < geometry.faces.length; i++) {
-
-    //     f = geometry.faces[i];
-    //     f.color.setRGB(Math.random(), Math.random(), Math.random());
-
-    //   }
-
-    //   // for ( var i = 0; i < geometry.faces.length; i++ ) 
-    //   // {
-    //   //   face = geometry.faces[ i ];
-    //   //   numberOfSides = ( face instanceof THREE.Face3 ) ? 3 : 4;
-    //   //   for( var j = 0; j < numberOfSides; j++ ) 
-    //   //   {
-    //   //     vertexIndex = face[ faceIndices[ j ] ];
-    //   //     face.vertexColors[ j ] = geometry.colors[ vertexIndex ];
-    //   //   }
-    //   // }
-
-    //   return geometry;
-    //   
-    // }
 
   function expand(data) {
     var cubes = [];
@@ -240,26 +205,26 @@
       window.addEventListener( 'resize', onWindowResize, false );
     }
 
-function setupAttributes( geometry, values ) {
+    function setupAttributes( geometry, values ) {
 
-				for( var f = 0; f < geometry.faces.length; f ++ ) {
+      for( var f = 0; f < geometry.faces.length; f ++ ) {
 
-					var face = geometry.faces[ f ];
+        var face = geometry.faces[ f ];
 
-					if ( face instanceof THREE.Face3 ) {
+        if ( face instanceof THREE.Face3 ) {
 
-						values[ f ] = [ new THREE.Vector4( 1, 0, 0, 0 ), new THREE.Vector4( 0, 1, 0, 0 ), new THREE.Vector4( 0, 0, 1, 0 ) ];
+          values[ f ] = [ new THREE.Vector4( 1, 0, 0, 0 ), new THREE.Vector4( 0, 1, 0, 0 ), new THREE.Vector4( 0, 0, 1, 0 ) ];
 
-					} else {
+          } else {
 
-						values[ f ] = [ new THREE.Vector4( 1, 0, 0, 1 ), new THREE.Vector4( 1, 1, 0, 1 ), new THREE.Vector4( 0, 1, 0, 1 ), new THREE.Vector4( 0, 0, 0, 1 ) ];
+          values[ f ] = [ new THREE.Vector4( 1, 0, 0, 1 ), new THREE.Vector4( 1, 1, 0, 1 ), new THREE.Vector4( 0, 1, 0, 1 ), new THREE.Vector4( 0, 0, 0, 1 ) ];
 
-					}
+        }
 
-				}
+      }
 
-			}
-    
+    }
+
 
     function animate() {
       requestAnimationFrame(animate);
@@ -275,100 +240,100 @@ function setupAttributes( geometry, values ) {
       renderer.render( scene, camera );
 
     }
-    
+
     init();
     animate();
-function onWindowResize() {
+    function onWindowResize() {
 
-				windowHalfX = window.innerWidth / 2;
-				windowHalfY = window.innerHeight / 2;
+      windowHalfX = window.innerWidth / 2;
+      windowHalfY = window.innerHeight / 2;
 
-				camera.aspect = window.innerWidth / window.innerHeight;
-				camera.updateProjectionMatrix();
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
 
-				renderer.setSize( window.innerWidth, window.innerHeight );
+      renderer.setSize( window.innerWidth, window.innerHeight );
 
-			}
+    }
 
-			//
+    //
 
-			function onDocumentMouseDown( event ) {
+    function onDocumentMouseDown( event ) {
 
-				//event.preventDefault();
+      //event.preventDefault();
 
-				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-				document.addEventListener( 'mouseup', onDocumentMouseUp, false );
-				document.addEventListener( 'mouseout', onDocumentMouseOut, false );
+      document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+      document.addEventListener( 'mouseup', onDocumentMouseUp, false );
+      document.addEventListener( 'mouseout', onDocumentMouseOut, false );
 
-				mouseXOnMouseDown = event.clientX - windowHalfX;
-				mouseYOnMouseDown = event.clientY - windowHalfY;
-				targetYRotationOnMouseDown = targetYRotation;
-				targetXRotationOnMouseDown = targetXRotation;
+      mouseXOnMouseDown = event.clientX - windowHalfX;
+      mouseYOnMouseDown = event.clientY - windowHalfY;
+      targetYRotationOnMouseDown = targetYRotation;
+      targetXRotationOnMouseDown = targetXRotation;
 
-			}
+    }
 
-			function onDocumentMouseMove( event ) {
+    function onDocumentMouseMove( event ) {
 
-				mouseX = event.clientX - windowHalfX;
-				mouseY = event.clientY - windowHalfY;
+      mouseX = event.clientX - windowHalfX;
+      mouseY = event.clientY - windowHalfY;
 
-				targetYRotation = targetYRotationOnMouseDown + ( mouseX - mouseXOnMouseDown ) * 0.02;
-				targetXRotation = targetXRotationOnMouseDown + ( mouseY - mouseYOnMouseDown ) * 0.02;
+      targetYRotation = targetYRotationOnMouseDown + ( mouseX - mouseXOnMouseDown ) * 0.02;
+      targetXRotation = targetXRotationOnMouseDown + ( mouseY - mouseYOnMouseDown ) * 0.02;
 
-			}
+    }
 
-			function onDocumentMouseUp( event ) {
+    function onDocumentMouseUp( event ) {
 
-				document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
-				document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
-				document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
-			}
+      document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
+      document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
+      document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
+    }
 
-			function onDocumentMouseOut( event ) {
+    function onDocumentMouseOut( event ) {
 
-				document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
-				document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
-				document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
-			}
+      document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
+      document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
+      document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
+    }
 
-			function onDocumentTouchStart( event ) {
+    function onDocumentTouchStart( event ) {
 
-				if ( event.touches.length == 1 ) {
+      if ( event.touches.length == 1 ) {
 
-					event.preventDefault();
+        event.preventDefault();
 
-					mouseXOnMouseDown = event.touches[ 0 ].pageX - windowHalfX;
-					targetRotationOnMouseDown = targetRotation;
+        mouseXOnMouseDown = event.touches[ 0 ].pageX - windowHalfX;
+        targetRotationOnMouseDown = targetRotation;
 
-				}
-			}
-
-			function onDocumentTouchMove( event ) {
-
-				if ( event.touches.length == 1 ) {
-
-					event.preventDefault();
-
-					mouseX = event.touches[ 0 ].pageX - windowHalfX;
-					targetRotation = targetRotationOnMouseDown + ( mouseX - mouseXOnMouseDown ) * 0.05;
-
-				}
       }
+    }
 
-      function onMouseWheel( event ) {
-        event = event ? event : window.event;
-        var wheelData = event.detail ? event.detail : event.wheelDelta;
-        console.log(event);
+    function onDocumentTouchMove( event ) {
 
-				/* if ( event.touches.length == 1 ) { */
+      if ( event.touches.length == 1 ) {
 
-				/* 	event.preventDefault(); */
+        event.preventDefault();
 
-				/* 	mouseX = event.touches[ 0 ].pageX - windowHalfX; */
-				/* 	targetRotation = targetRotationOnMouseDown + ( mouseX - mouseXOnMouseDown ) * 0.05; */
+        mouseX = event.touches[ 0 ].pageX - windowHalfX;
+        targetRotation = targetRotationOnMouseDown + ( mouseX - mouseXOnMouseDown ) * 0.05;
 
-				/* } */
-			}
+      }
+    }
+
+    function onMouseWheel( event ) {
+      event = event ? event : window.event;
+      var wheelData = event.detail ? event.detail : event.wheelDelta;
+      console.log(event);
+
+      /* if ( event.touches.length == 1 ) { */
+
+        /* 	event.preventDefault(); */
+
+        /* 	mouseX = event.touches[ 0 ].pageX - windowHalfX; */
+        /* 	targetRotation = targetRotationOnMouseDown + ( mouseX - mouseXOnMouseDown ) * 0.05; */
+
+        /* } */
+    }
 
   </script> 
 </body> 
