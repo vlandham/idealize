@@ -138,7 +138,7 @@ restart
 loadPackage"Visualize"
 
 R = QQ[x,y,z]
-I = ideal"x4,x2y3,xy6z,z4,y8"
+I = ideal"x20,x2y2z,xy6z3,z8,y8"
 visIdeal(I, Path => "~/Dropbox/GitHub/idealize/temp-files/" )
 visIntegralClosure(I, Path => "./temp-files/" )
 
