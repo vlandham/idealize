@@ -345,11 +345,11 @@
 
       // meshQuads = new THREE.Mesh( cube, materialQuads );
 
-      data.forEach(function (d,i) {
-        var vec = new THREE.Vector3(d[1],d[2],d[0]);
-        geometry.vertices.push(vec);
-      });
-      geometry.vertices.push(new THREE.Vector3(0,0,0));
+      /* data.forEach(function (d,i) { */
+      /*   var vec = new THREE.Vector3(d[1],d[2],d[0]); */
+      /*   geometry.vertices.push(vec); */
+      /* }); */
+      /* geometry.vertices.push(new THREE.Vector3(0,0,0)); */
 
       /* cubes_data = expand3d(data); */
       cubes_data = processCubes(data);
@@ -359,15 +359,43 @@
         group.add(mesh);
       });
 
-
-      /* var shape  = new THREE.Shape(points); */
-
       ideal = new THREE.Line(geometry, line_material);
       group.add(ideal);
       /* geometry = new THREE.CubeGeometry(1,1,1); */
       /* cube = new THREE.Mesh(geometry, material); */
 
+
+      maxX = _.max(cubes_data, function(d) { return d[2] })[2];
+      maxY = _.max(cubes_data, function(d) { return d[0] })[0];
+      maxZ = _.max(cubes_data, function(d) { return d[1] })[1];
+
+
+      var lineMaterial = new THREE.LineBasicMaterial({
+        color: 0x000000, opacity: 0.6, linewidth: 2 });
+
+      var lineGeometry = new THREE.Geometry();
+      lineGeometry.vertices.push(new THREE.Vector3(-1, -1, -1));
+      lineGeometry.vertices.push(new THREE.Vector3(-1, -1, maxX + 3));
+      lineGeometry.vertices.push(new THREE.Vector3(-1, -1, -1));
+      lineGeometry.vertices.push(new THREE.Vector3(maxY + 3, -1,-1));
+      lineGeometry.vertices.push(new THREE.Vector3(-1, -1, -1));
+      lineGeometry.vertices.push(new THREE.Vector3(-1, maxZ + 3,-1));
+      /* lineGeometry.vertices.push(new THREE.Vector3(10, 0, 0)); */
+
+      var line = new THREE.Line(lineGeometry, lineMaterial);
+
+      group.add(line);
+      /* var xGeometry = new THREE.Geometry(); */
+      /* xGeometry.vertices.push(new THREE.Vector3(0, 0, maxX + 2)); */
+      /* xGeometry.vertices.push(new THREE.Vector3(1, -1, maxX + 2)); */
+      /* xGeometry.vertices.push(new THREE.Vector3(0, 0.5, maxX + 2)); */
+      /* var line = new THREE.Line(xGeometry, lineMaterial); */
+      /* group.add(line); */
+
       scene.add(group);
+
+      /* var shape  = new THREE.Shape(points); */
+
       /* camera.position.z = 5; */
 
       document.addEventListener( 'mousedown', onDocumentMouseDown, false );
