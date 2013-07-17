@@ -84,10 +84,24 @@
     var windowHalfX = window.innerWidth / 2;
     var windowHalfY = window.innerHeight / 2;
 
-    // var data = [[4, 0, 0], [2, 3, 0], [1, 6, 1], [0, 0, 4], [0, 8, 0]];
+    //var data = [[4, 0, 0], [2, 3, 0], [1, 6, 1], [0, 0, 4], [0, 8, 0]];
+
+    /* var layers =  [[[4, 0, 0], [0,8,0], [2, 3, 0]], */
+    /*                [[4, 0, 1], [0,8,1], [2, 3, 1], [1, 6, 1]], */
+    /*                [[4, 0, 2], [0,8,2], [2, 3, 2], [1, 6, 2]], */
+    /*                [[4, 0, 3], [0,8,3], [2, 3, 3], [1, 6, 3]], */
+    /*                [[4, 0, 4], [0,8,4], [2, 3, 4], [1, 6, 4], [0, 0, 4]]] */
+
+    data = [[0, 0, 0], [0, 1, 0], [0, 2, 0], [0, 3, 0], [1, 0, 0], [1, 1, 0], [1, 2, 0], [1, 3, 0], [2, 0, 0], [2, 1, 0], [2, 2, 0], [2, 3, 0], [3, 0, 0], [3, 1, 0], [3, 2, 0], [3, 3, 0], [4, 0, 0], [4, 1, 0], [4, 2, 0], [4, 3, 0], [0, 4, 0], [0, 5, 0], [0, 6, 0], [0, 7, 0], [0, 8, 0], [1, 4, 0], [1, 5, 0], [1, 6, 0], [1, 7, 0], [1, 8, 0], [2, 4, 0], [2, 5, 0], [2, 6, 0], [2, 7, 0], [2, 8, 0], [0, 0, 1], [0, 1, 1], [0, 2, 1], [0, 3, 1], [1, 0, 1], [1, 1, 1], [1, 2, 1], [1, 3, 1], [2, 0, 1], [2, 1, 1], [2, 2, 1], [2, 3,1], [3, 0, 1], [3, 1, 1], [3, 2, 1], [3, 3, 1], [4, 0, 1], [4, 1, 1], [4, 2, 1], [4, 3, 1], [0, 4, 1], [0, 5, 1], [0, 6, 1], [1, 4, 1], [1, 5, 1], [1, 6, 1], [2, 4, 1], [2, 5, 1], [2, 6, 1], [0, 7, 1], [0, 8, 1], [1, 7, 1], [1, 8, 1], [0, 0, 2], [0, 1, 2], [0, 2, 2], [0, 3, 2], [1, 0, 2], [1, 1, 2], [1, 2, 2], [1, 3, 2], [2, 0, 2], [2, 1, 2], [2, 2, 2], [2, 3, 2], [3, 0, 2], [3, 1, 2], [3, 2, 2], [3, 3, 2], [4, 0, 2], [4, 1, 2], [4, 2, 2], [4, 3, 2], [0, 4, 2], [0, 5, 2], [0, 6, 2], [1, 4, 2], [1, 5, 2], [1, 6, 2], [2, 4, 2], [2, 5, 2], [2, 6, 2], [0, 7, 2], [0, 8, 2], [1, 7, 2], [1, 8, 2], [0, 0, 3], [0, 1, 3], [0, 2, 3], [0, 3, 3], [1, 0, 3], [1, 1, 3], [1, 2, 3], [1, 3, 3], [2, 0, 3], [2, 1, 3], [2, 2, 3], [2, 3, 3], [3, 0, 3], [3, 1, 3], [3, 2, 3], [3, 3, 3], [4, 0, 3], [4, 1, 3], [4, 2, 3], [4, 3, 3], [0, 4, 3], [0, 5, 3], [0, 6, 3], [1, 4, 3], [1, 5, 3], [1, 6, 3], [2, 4, 3], [2, 5, 3], [2, 6, 3], [0, 7, 3], [0, 8, 3], [1, 7, 3], [1, 8, 3], [0, 0, 4], [1, 0, 4], [2, 0, 4], [3, 0, 4], [4, 0, 4], [0, 1, 4], [0, 2, 4], [0, 3, 4], [1, 1, 4], [1, 2, 4], [1, 3, 4], [2, 1, 4], [2, 2, 4], [2, 3, 4], [3, 1, 4], [3, 2, 4], [3, 3, 4], [4, 1, 4], [4, 2, 4], [4, 3, 4], [0, 4, 4], [0, 5, 4], [0, 6, 4], [1, 4, 4], [1, 5, 4], [1, 6, 4], [2, 4, 4], [2, 5, 4], [2, 6, 4], [0, 7, 4], [0, 8, 4], [1, 7, 4], [1, 8, 4]];
+
+
+
+
+      data = [[0, 0, 0], [1, 0, 0], [2, 0, 0], [3, 0, 0], [3, 1, 0], [3, 2, 0], [3, 2, 1], [3, 2, 2], [3, 2, 3], [3,  1, 1], [3, 1, 2], [3, 1, 3], [3, 0, 1], [3, 0, 2], [3, 0, 3], [2, 1, 0], [2, 2, 0], [2, 2, 1], [2, 2,  2], [2, 2, 3], [2, 1, 1], [2, 1, 2], [2, 1, 3], [2, 0, 1], [2, 0, 2], [2, 0, 3], [1, 1, 0], [1, 2, 0],   [1, 3, 0], [1, 4, 0], [1, 5, 0], [1, 6, 0], [1, 7, 0], [1, 5, 1], [1, 5, 2], [1, 5, 3], [1, 4, 1], [1,  4, 2], [1, 4, 3], [1, 3, 1], [1, 3, 2], [1, 3, 3], [1, 2, 1], [1, 2, 2], [1, 2, 3], [1, 1, 1], [1, 1,  2], [1, 1, 3], [1, 0, 1], [1, 0, 2], [1, 0, 3], [0, 1, 0], [0, 2, 0], [0, 3, 0], [0, 4, 0], [0, 5, 0],  [0, 6, 0], [0, 7, 0], [0, 7, 1], [0, 7, 2], [0, 7, 3], [0, 6, 1], [0, 6, 2], [0, 6, 3], [0, 5, 1], [0, 5, 2], [0, 5, 3], [0, 4, 1], [0, 4, 2], [0, 4, 3], [0, 3, 1], [0, 3, 2], [0, 3, 3], [0, 2, 1], [0, 2,  2], [0, 2, 3], [0, 1, 1], [0, 1, 2], [0, 1, 3], [0, 0, 1], [0, 0, 2], [0, 0, 3]];
+
     // var data = [[4, 0, 0], [0, 5, 0], [0, 0, 6]];
 
-    var data = [[4, 0, 0], [0, 5, 0], [0, 0, 6], [1,1,0], [0,1,1], [1,0,1]];
+   // var data = [[4, 0, 0], [0, 5, 0], [0, 0, 6], [1,1,0], [0,1,1], [1,0,1]];
 
     function newMesh(point, geometry, materials) {
       var mesh = new THREE.Mesh( geometry, materials );
@@ -96,6 +110,108 @@
       mesh.position.z = point[2] - 1/2;
       mesh.updateMatrix();
       return mesh;
+    }
+
+    function buildLayers(layers) {
+      var cubes = [];
+      var xIndex = 0;
+      var yIndex = 1;
+      var zIndex = 2;
+      for(l = 0; l < layers.length; l++) {
+        var layer = layers[l]
+        z = layer[0][zIndex] + 1;
+        var maxX = _.max(data, function(d) { return d[xIndex]; })[xIndex];
+        maxX = maxX == 0 ? 1 : maxX;
+        var maxY = _.max(data, function(d) { return d[yIndex]; })[yIndex];
+        maxY = maxY == 0 ? 1 : maxY;
+        for( i = 1; i < maxX + 1; i++ ) {
+          for( j = 1; j < maxY + 1; j++ ) {
+
+          }
+        }
+      }
+
+      return cubes;
+    }
+
+    function processCubes(data) {
+      var cubes = [];
+      data.forEach(function(d) {
+        cubes.push([d[1],d[2],d[0]]);
+      })
+      return cubes;
+    }
+
+    function expand3d(data) {
+      var cubes = [];
+      var xIndex = 0;
+      var yIndex = 1;
+      var zIndex = 2;
+      var maxX = _.max(data, function(d) { return d[xIndex]; })[xIndex];
+      maxX = maxX == 0 ? 1 : maxX;
+      var maxY = _.max(data, function(d) { return d[yIndex]; })[yIndex];
+      maxY = maxY == 0 ? 1 : maxY;
+      var maxZ = _.max(data, function(d) { return d[zIndex]; })[zIndex];
+      maxZ = maxZ == 0 ? 1 : maxZ;
+
+      var minXall = _.chain(data).filter(function(d) {return d[xIndex] != 0; }).min(function(d) { return d[xIndex]; }).value()[xIndex];
+      var minYall = _.chain(data).filter(function(d) {return d[yIndex] != 0; }).min(function(d) { return d[yIndex]; }).value()[yIndex];
+      var minZall = _.chain(data).filter(function(d) {return d[zIndex] != 0; }).min(function(d) { return d[zIndex]; }).value()[zIndex];
+
+
+      for(var i = 1; i < maxX + 1; i++) {
+        var dataX = _.filter(data, function(d) { return  d[xIndex] == (i - 1); });
+        for(var j = 1; j < maxY + 1; j++) {
+          var dataY = _.filter(data, function(d) { return  d[yIndex] == (j - 1); });
+          var dataXY = _.filter(dataX, function(d) { return  d[yIndex] == (j - 1); });
+          console.log(dataXY);
+          for(var k = 1; k < maxZ + 1; k++) {
+            var dataZ = _.filter(data, function(d) { return  d[zIndex] == (k - 1); });
+            var dataXYZ = _.filter(dataXY, function(d) { return  d[zIndex] == (k - 1); });
+            if(false) {
+              } else {
+              cubes.push([j,k,i]);
+            }
+          }
+        }
+      }
+
+      return cubes;
+    }
+
+    function expand2d(data) {
+      var cubes = [];
+      var xIndex = 0;
+      var yIndex = 1;
+      var zIndex = 2;
+
+      var maxX = _.max(data, function(d) { return d[xIndex]; })[xIndex];
+      maxX = maxX == 0 ? 1 : maxX;
+
+      var minYall = _.chain(data).filter(function(d) {return d[yIndex] != 0; }).min(function(d) { return d[yIndex]; }).value()[yIndex];
+
+      var minZall = _.chain(data).filter(function(d) {return d[zIndex] != 0; }).min(function(d) { return d[zIndex]; }).value()[zIndex];
+
+      for( var i = 1; i < maxX + 1; i++) {
+        var dataX = _.filter(data, function(d) { return  d[xIndex] == (i - 1); });
+        var maxY = minYall;
+        if(dataX.length > 0) {
+          maxY = _.max(dataX, function(d) { return d[yIndex]; })[yIndex];
+        }
+        for( var j = 1; j < maxY + 1; j++) {
+          var dataXY = _.filter(dataX, function(d) { return  d[yIndex] == (j - 1); });
+          console.log(dataXY);
+          var maxZ = minZall;
+          if(dataXY.length > 0) {
+            maxZ = _.max(dataXY, function(d) { return d[zIndex]; })[zIndex];
+          }
+          for( var k = 1; k < maxZ + 1; k++) {
+            cubes.push([j,k,i]);
+          }
+        }
+      }
+
+      return cubes;
     }
 
   function expand(data) {
@@ -235,7 +351,8 @@
       });
       geometry.vertices.push(new THREE.Vector3(0,0,0));
 
-      cubes_data = expand(data);
+      /* cubes_data = expand3d(data); */
+      cubes_data = processCubes(data);
 
       cubes_data.forEach(function(cube_data) {
         var mesh = newMesh(cube_data, cube, materialQuads);

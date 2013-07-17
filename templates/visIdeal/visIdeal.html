@@ -97,6 +97,14 @@
       return mesh;
     }
 
+    function processCubes(data) {
+      var cubes = [];
+      data.forEach(function(d) {
+        cubes.push([d[1],d[2],d[0]]);
+      })
+      return cubes;
+    }
+
   function expand(data) {
     var cubes = [];
     // Is this a good way to add squares?
@@ -177,7 +185,7 @@
       });
       geometry.vertices.push(new THREE.Vector3(0,0,0));
 
-      cubes_data = expand(data);
+      cubes_data = processCubes(data);
 
       cubes_data.forEach(function(cube_data) {
         var mesh = newMesh(cube_data, cube, materialQuads);
