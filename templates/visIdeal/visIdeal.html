@@ -179,11 +179,11 @@
 
       // meshQuads = new THREE.Mesh( cube, materialQuads );
 
-      data.forEach(function (d,i) {
-        var vec = new THREE.Vector3(d[0],d[1],d[2]);
-        geometry.vertices.push(vec);
-      });
-      geometry.vertices.push(new THREE.Vector3(0,0,0));
+      /* data.forEach(function (d,i) { */
+      /*   var vec = new THREE.Vector3(d[0],d[1],d[2]); */
+      /*   geometry.vertices.push(vec); */
+      /* }); */
+      /* geometry.vertices.push(new THREE.Vector3(0,0,0)); */
 
       cubes_data = processCubes(data);
 
