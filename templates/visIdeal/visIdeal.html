@@ -1,9 +1,54 @@
 <html> 
   <head> 
     <title>visIdeal</title> 
-    <style>canvas { width: 100%; height: 100% }</style> 
+     <style>
+      canvas { width: 100%; height: 100% }
+      #key {
+        position: absolute;
+        margin-left: 20px;
+        width: 100px;
+        height:100px;
+        background-color: #eee;
+      }
+      #key .text {
+        margin-top: 10px;
+        clear: right;
+
+      }
+      #key .section {
+        clear: both;
+        margin-bottom: 10px;
+        margin-top: 10px;
+        width: 100%;
+      }
+      .key {
+        margin-left: 10px;
+        margin-right: 10px;
+        /* margin-top: 10px; */
+        /* margin-bottom: 30px; */
+        float:left;
+        width: 20px;
+        height: 20px;
+      }
+
+      #xkey {
+        background-color: green;
+      }
+      #ykey {
+        background-color: red;
+      }
+      #zkey {
+        background-color: blue;
+      }
+    </style> 
   </head> 
-  <body> 
+  <body>     
+    <div id="key">
+      <div class="section"><div class="key" id="xkey"></div><div class='text'>X axis</div></div>
+      <div class="section"><div class="key" id="ykey"></div><div class='text'>Y axis</div></div>
+      <div class="section"><div class="key" id="zkey"></div><div class='text'>Z axis</div></div>
+    </div>
+
   <script src="js/three.min.js"></script> 
   <script src="js/underscore.js"></script> 
 		<script type="x-shader/x-vertex" id="vertexShader">
@@ -200,6 +245,35 @@
       /* geometry = new THREE.CubeGeometry(1,1,1); */
       /* cube = new THREE.Mesh(geometry, material); */
 
+      maxX = _.max(cubes_data, function(d) { return d[2] })[2];
+      maxY = _.max(cubes_data, function(d) { return d[0] })[0];
+      maxZ = _.max(cubes_data, function(d) { return d[1] })[1];
+
+
+      var lwidth = 3;
+      var lineMaterial = new THREE.LineBasicMaterial({color: 0x044000, opacity: 0.8, linewidth: lwidth });
+
+      var lineGeometry = new THREE.Geometry();
+      lineGeometry.vertices.push(new THREE.Vector3(-1, -1, -1));
+      lineGeometry.vertices.push(new THREE.Vector3(-1, -1, maxX + 3));
+      var line = new THREE.Line(lineGeometry, lineMaterial);
+      group.add(line);
+      lineMaterial = new THREE.LineBasicMaterial({color: 0xAA0000, opacity: 0.8, linewidth: lwidth });
+      lineGeometry = new THREE.Geometry();
+      lineGeometry.vertices.push(new THREE.Vector3(-1, -1, -1));
+      lineGeometry.vertices.push(new THREE.Vector3(maxY + 3, -1,-1));
+      line = new THREE.Line(lineGeometry, lineMaterial);
+      group.add(line);
+      lineMaterial = new THREE.LineBasicMaterial({color: 0x0000DD, opacity: 0.8, linewidth: lwidth });
+      lineGeometry = new THREE.Geometry();
+      lineGeometry.vertices.push(new THREE.Vector3(-1, -1, -1));
+      lineGeometry.vertices.push(new THREE.Vector3(-1, maxZ + 3,-1));
+      line = new THREE.Line(lineGeometry, lineMaterial);
+      group.add(line);
+      /* lineGeometry.vertices.push(new THREE.Vector3(10, 0, 0)); */
+
+      var line = new THREE.Line(lineGeometry, lineMaterial);
+      group.add(line);
       scene.add(group);
       /* camera.position.z = 5; */
 
