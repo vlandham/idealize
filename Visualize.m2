@@ -32,6 +32,7 @@ export {
     
     -- Options
      "Path",
+     "visTemplate",
     
     -- Methods
      "visIntegralClosure",
@@ -43,19 +44,22 @@ export {
 -- METHODS
 ------------------------------------------------------------
 
---input: A string that is an array passed from visIdeal or visIntegralClosure
---output: The Newton polytope of the input array.
+--input: Three Stings. The first is a key word to look for.  The second
+--    	 is what to replace the key word with. The third is the path 
+--    	 where template file is located.
+--output: A file with visKey replaced with visString.
 --
-visIdealOutput = method(Options => {Path => "./" })
-visIdealOutput(String) := opts -> S -> (
+visOutput = method(Options => {Path => "./"})
+visOutput(String,String,String) := opts -> (visKey,visString,visTemplate) -> (
     local fileName; local openFile; local PATH;
     
     fileName = (toString currentTime() )|".html";
     PATH = opts.Path|fileName;
     openOut PATH << 
-    	replace("visArray", S, get "./templates/visIdeal/visIdeal.html") << 
+    	replace(visKey, visString , get visTemplate) << 
 	close;
         
+--  "./templates/visIdeal/visIdeal.html"       
 --  openOut PATH << 
 --     get "./templates/visIdeal/temp01.html" << 
 --       endl << endl <<
@@ -69,41 +73,43 @@ visIdealOutput(String) := opts -> S -> (
     return run openFile;
     )
 
---input: A monomial ideal of a polynomial ring in 2 or 3 variables.
+--input: A monomial ideal of a polynomial ring in 3 variables.
 --output: The newton polytope of the of the ideal.
 --
-visIdeal = method(Options => {Path => "./" })
+visIdeal = method(Options => {Path => "./", visTemplate => "./templates/visIdeal/visIdeal.html"})
 visIdeal(Ideal) := opts -> J -> (
---    local G; 
-    local R;
-    local arrayList; local arrayString; 
+    local R; local arrayList; local arrayString;
     
     R = ring J;
     arrayList = apply(flatten entries basis(0,infinity, R/J), m -> flatten exponents m );
     arrayList = new Array from apply(arrayList, i -> new Array from i);
-    
---    G = flatten entries mingens J;
-    
---    arrayList = new Array from apply(G, i -> new Array from flatten exponents i);
     arrayString = toString arrayList;
     
-    return visIdealOutput(arrayString, Path => opts.Path );
+    return visOutput( "visArray", arrayString, opts.visTemplate, Path => opts.Path );
     )
 
 
 --input: A monomial ideal of a polynomial ring in 2 or 3 variables.
 --output: The newton polytope of the integral closure of the ideal.
 --
-visIntegralClosure = method(Options => {Path => "./" })
+visIntegralClosure = method(Options => {Path => "./", visTemplate => "./templates/visIdeal/visIdeal.html"})
 visIntegralClosure(Ideal) := opts -> J -> (
-    local G; local arrayList; local arrayString; 
-    local fileName; local openFile;
+    local R; local arrayList; local arrayString; 
+--    local fileName; local openFile;
 
-    G = flatten entries mingens integralClosure J;
-    arrayList = new Array from apply(G, i -> new Array from flatten exponents i);
+    R = ring J;
+    J = integralClosure J;
+    arrayList = apply(flatten entries basis(0,infinity, R/J), m -> flatten exponents m );
+    arrayList = new Array from apply(arrayList, i -> new Array from i);
     arrayString = toString arrayList;
     
-    return visIdealOutput(arrayString, Path => opts.Path ); 
+    return visOutput( "visArray", arrayString, opts.visTemplate, Path => opts.Path );
+
+--    G = flatten entries mingens integralClosure J;
+--    arrayList = new Array from apply(G, i -> new Array from flatten exponents i);
+--    arrayString = toString arrayList;
+    
+--    return visOutput(arrayString, Path => opts.Path ); 
     )
 
 
@@ -149,13 +155,21 @@ I = ideal"x20,x2y2z,xy6z3,z8,y8"
 I = ideal"x4,xy6z,x2y3,z4,y8"
 I = ideal"x4,xy,yz,xz,z6,y5"
 visIdeal(I, Path => "~/Dropbox/GitHub/idealize/temp-files/" )
-visIntegralClosure(I, Path => "./temp-files/" )
+-- visIntegralClosure(I, Path => "./temp-files/" )
 
 S = QQ[x,y]
 J = ideal"x3,y5"
 visIdeal( J,  Path => "./temp-files/" )
-visIntegralClosure( I,  Path => "./temp-files/" )
+-- visIntegralClosure( I,  Path => "./temp-files/" )
 
+
+
+
+-----------------------------
+-----------------------------
+-- Testing Ground
+-----------------------------
+-----------------------------
 
 R = QQ[x,y,z]
 I = ideal"x4,xy6z,x2y3,z4,y8"
